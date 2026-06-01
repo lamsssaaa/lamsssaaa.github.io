@@ -1,6 +1,6 @@
 import { type Lang, UI } from '../../lib/i18n'
 import { profile } from '../../data/content'
-import { AdaptiveVideo } from '../AdaptiveVideo'
+import { HeroVisual } from '../HeroVisual'
 import styles from './Hero.module.css'
 
 export function Hero({ lang }: { lang: Lang }) {
@@ -10,7 +10,7 @@ export function Hero({ lang }: { lang: Lang }) {
     <section className={styles.hero} id="top">
       <div className="ambient" />
       <div className={styles.media}>
-        <AdaptiveVideo high="/video/hero-high.mp4" low="/video/hero-low.mp4" poster="/video/hero-poster.svg" />
+        <HeroVisual />
         <div className={styles.scrim} />
       </div>
 
