@@ -169,12 +169,12 @@ export const services: ServiceItem[] = [
 // ── Projects / recent work ────────────────────────────────────────────────────
 export const projectsHeading = { fr: 'Travaux récents', en: 'Recent work' } as Localized<string>
 export const projects: ProjectItem[] = [
-  { name: '〈Projet 1〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'E-commerce', en: 'E-commerce' }, videoHigh: '/video/work-1-high.mp4', videoLow: '/video/work-1-low.mp4' },
-  { name: '〈Projet 2〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Publicité', en: 'Advertising' }, poster: '/images/work-2.webp', videoHigh: '/video/work-2-high.mp4', videoLow: '/video/work-2-low.mp4' },
-  { name: '〈Projet 3〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Site web', en: 'Website' }, videoHigh: '/video/work-3-high.mp4', videoLow: '/video/work-3-low.mp4' },
-  { name: '〈Projet 4〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Contenu', en: 'Content' }, videoHigh: '/video/work-4-high.mp4', videoLow: '/video/work-4-low.mp4' },
-  { name: '〈Projet 5〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Growth', en: 'Growth' }, videoHigh: '/video/work-5-high.mp4', videoLow: '/video/work-5-low.mp4' },
-  { name: '〈Projet 6〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Branding', en: 'Branding' }, videoHigh: '/video/work-6-high.mp4', videoLow: '/video/work-6-low.mp4' },
+  { name: '〈Projet 1〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'E-commerce', en: 'E-commerce' }, videoHigh: '/videos/work-1-high.mp4', videoLow: '/videos/work-1-low.mp4' },
+  { name: '〈Projet 2〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Publicité', en: 'Advertising' }, poster: '/images/work-2.webp', videoHigh: '/videos/work-2-high.mp4', videoLow: '/videos/work-2-low.mp4' },
+  { name: '〈Projet 3〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Site web', en: 'Website' }, videoHigh: '/videos/work-3-high.mp4', videoLow: '/videos/work-3-low.mp4' },
+  { name: '〈Projet 4〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Contenu', en: 'Content' }, videoHigh: '/videos/work-4-high.mp4', videoLow: '/videos/work-4-low.mp4' },
+  { name: '〈Projet 5〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Growth', en: 'Growth' }, videoHigh: '/videos/work-5-high.mp4', videoLow: '/videos/work-5-low.mp4' },
+  { name: '〈Projet 6〉', line: { fr: '〈Une phrase qui résume le projet.〉', en: '〈A line that sums up the project.〉' }, client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Branding', en: 'Branding' }, videoHigh: '/videos/work-6-high.mp4', videoLow: '/videos/work-6-low.mp4' },
 ]
 
 // ── Clients / companies worked with ───────────────────────────────────────────

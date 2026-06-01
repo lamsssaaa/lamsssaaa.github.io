@@ -10,7 +10,7 @@ export function VideoInterlude({
   id,
   high,
   low,
-  poster = '/video/hero-poster.svg',
+  poster = '/videos/hero-poster.svg',
   caption,
   kicker,
 }: {

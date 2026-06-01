@@ -30,8 +30,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <Distinctions lang={l} />
       <About lang={l} />
       <VideoInterlude
-        high="/video/reel-2-high.mp4"
-        low="/video/reel-2-low.mp4"
+        high="/videos/reel-2-high.mp4"
+        low="/videos/reel-2-low.mp4"
         kicker={c.kicker}
         caption={c.caption}
       />

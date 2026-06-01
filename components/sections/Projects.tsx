@@ -28,7 +28,7 @@ export function Projects({ lang }: { lang: Lang }) {
         {/* 1. Full-bleed backgrounds (one per project, crossfading). Resolved at
             build: /videos/background-N.mp4 → /images/background-N.webp → cover. */}
         {projects.map((p, i) => {
-          const bg = resolveProjectBg(i + 1, p.poster ?? '/video/hero-poster.svg')
+          const bg = resolveProjectBg(i + 1, p.poster ?? '/videos/hero-poster.svg')
           return (
             <div key={`bg-${i}`} className={styles.bg} data-bg style={v(i)}>
               {bg.video ? (
@@ -55,7 +55,7 @@ export function Projects({ lang }: { lang: Lang }) {
         {projects.map((p, i) => (
           <article key={p.name} className={styles.card} data-diag style={v(i)}>
             <div className={styles.media}>
-              <AdaptiveVideo high={p.videoHigh ?? '/video/hero-high.mp4'} low={p.videoLow ?? '/video/hero-low.mp4'} poster={p.poster ?? '/video/hero-poster.svg'} />
+              <AdaptiveVideo high={p.videoHigh ?? '/videos/hero-high.mp4'} low={p.videoLow ?? '/videos/hero-low.mp4'} poster={p.poster ?? '/videos/hero-poster.svg'} />
               <div className={styles.shade} />
             </div>
             <div className={styles.overlay}>
