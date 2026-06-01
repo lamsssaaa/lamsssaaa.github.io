@@ -4,6 +4,7 @@ import { LANGS, isLang, type Lang } from '../../lib/i18n'
 import { profile } from '../../data/content'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
+import { SmoothScroll } from '../../components/SmoothScroll'
 
 export function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }))
@@ -40,6 +41,7 @@ export default async function LangLayout({
   const l = lang as Lang
   return (
     <>
+      <SmoothScroll />
       <a href="#main" className="skip-link">
         {l === 'fr' ? 'Aller au contenu' : 'Skip to content'}
       </a>

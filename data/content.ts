@@ -45,7 +45,7 @@ export interface TestimonialItem {
 
 // ── Profile / hero ──────────────────────────────────────────────────────────
 export const profile = {
-  name: '〈Ton Nom〉',
+  name: 'Ahmed Salam',
   /** Short role line shown near the name. */
   role: {
     fr: 'Growth & e-commerce · marketing digital',
@@ -62,6 +62,12 @@ export const profile = {
     en: 'Faster than an agency. Broader than a freelancer.',
   } as Localized<string>,
   location: { fr: 'Genève, Suisse', en: 'Geneva, Switzerland' } as Localized<string>,
+  /** Hero stat counters — edit the numbers to your real figures. */
+  stats: [
+    { value: '〈50〉+', label: { fr: 'Projets', en: 'Projects' } },
+    { value: '〈30〉+', label: { fr: 'Clients', en: 'Clients' } },
+    { value: '〈5〉+', label: { fr: 'Années', en: 'Years' } },
+  ] as { value: string; label: Localized<string> }[],
 }
 
 // ── About ────────────────────────────────────────────────────────────────────

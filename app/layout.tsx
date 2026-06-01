@@ -18,7 +18,7 @@ const sans = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://portfolio.example.com'),
-  title: { default: '〈Ton Nom〉 — Growth & e-commerce', template: '%s | 〈Ton Nom〉' },
+  title: { default: 'Ahmed Salam — Growth & e-commerce', template: '%s | Ahmed Salam' },
   description: 'Portfolio — growth, e-commerce et marketing digital.',
 }
 
