@@ -84,31 +84,57 @@ export function MotionProvider() {
       ScrollTrigger.refresh()
     })
 
-    // Diagonal travel: each project card rides a diagonal as you scroll its
-    // slot — 0% bottom-right, 50% centered, 100% top-left. Desktop only.
+    // Diagonal "spiral" timeline: the work section pins and project cards ride
+    // a shared timeline, staggered so consecutive cards are 0.4 apart in local
+    // progress (at 50% the previous is at 90%, the next at 10%). Each card goes
+    // bottom-right → center → top-left, with an opacity curve (0→.2→1→.2→0) and
+    // a fisheye-like scale bulge at center. Desktop only.
     const mm = gsap.matchMedia()
     mm.add('(min-width: 760px)', () => {
-      const tweens = gsap.utils.toArray<HTMLElement>('[data-diag]').map((rect) => {
-        const slot = rect.closest('[data-slot]') as HTMLElement | null
-        return gsap.fromTo(
-          rect,
-          { x: () => window.innerWidth * 0.42, y: () => window.innerHeight * 0.45, rotateZ: 2 },
-          {
-            x: () => -window.innerWidth * 0.42,
-            y: () => -window.innerHeight * 0.45,
-            rotateZ: -2,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: slot ?? rect,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true,
-              invalidateOnRefresh: true,
-            },
-          },
-        )
+      const section = document.querySelector<HTMLElement>('[data-diag-section]')
+      const cards = gsap.utils.toArray<HTMLElement>('[data-diag]')
+      if (!section || !cards.length) return
+      section.setAttribute('data-on', '')
+      const STEP = 0.4
+      const total = (cards.length - 1) * STEP + 1
+      const ax = () => window.innerWidth * 0.42
+      const ay = () => window.innerHeight * 0.45
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          pin: true,
+          scrub: 1,
+          start: 'top top',
+          end: () => '+=' + window.innerHeight * total,
+          invalidateOnRefresh: true,
+        },
       })
-      return () => tweens.forEach((t) => { t.scrollTrigger?.kill(); t.kill() })
+
+      cards.forEach((card, i) => {
+        const at = i * STEP
+        // Diagonal position (linear): bottom-right → center → top-left.
+        tl.fromTo(
+          card,
+          { xPercent: -50, yPercent: -50, x: () => ax(), y: () => ay(), rotateZ: 3 },
+          { xPercent: -50, yPercent: -50, x: () => -ax(), y: () => -ay(), rotateZ: -3, ease: 'none', duration: 1 },
+          at,
+        )
+        // Opacity curve + fisheye bulge + z-index (centered card on top).
+        const e = 'none'
+        tl.set(card, { opacity: 0, scale: 0.7, zIndex: 1 }, at)
+        tl.to(card, { opacity: 0.2, scale: 0.78, zIndex: 2, duration: 0.1, ease: e }, at)
+        tl.to(card, { opacity: 1, scale: 1.08, zIndex: 10, duration: 0.3, ease: e }, at + 0.1)
+        tl.to(card, { scale: 1.1, duration: 0.2, ease: e }, at + 0.4) // hold opacity 1 (40–60%)
+        tl.to(card, { opacity: 0.2, scale: 0.78, zIndex: 2, duration: 0.3, ease: e }, at + 0.6)
+        tl.to(card, { opacity: 0, scale: 0.7, zIndex: 1, duration: 0.1, ease: e }, at + 0.9)
+      })
+
+      return () => {
+        section.removeAttribute('data-on')
+        tl.scrollTrigger?.kill()
+        tl.kill()
+      }
     })
 
     return () => {
