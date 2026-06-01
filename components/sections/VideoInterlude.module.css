@@ -39,8 +39,13 @@
 .caption {
   font-family: var(--serif);
   font-size: clamp(1.8rem, 5vw, 3.6rem);
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.01em;
   margin: 0;
   max-width: 20ch;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+}
+.caption span {
+  display: inline-block;
 }

@@ -6,9 +6,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 /**
  * Smooth scrolling (Lenis) + scroll-driven animations (GSAP ScrollTrigger):
- *  - parallax on [data-parallax] (depth as you scroll)
+ *  - hero intro timeline on load ([data-anim], ordered by DOM)
+ *  - parallax on [data-parallax] media (depth as you scroll)
  *  - 3D tilt + rise reveal on .section-title and [data-fx="rise"]
- * Disabled under prefers-reduced-motion. Replaces the old SmoothScroll.
+ *  - word-by-word reveal on [data-words] > span
+ * Disabled under prefers-reduced-motion.
  */
 export function MotionProvider() {
   useEffect(() => {
@@ -22,6 +24,16 @@ export function MotionProvider() {
     gsap.ticker.lagSmoothing(0)
 
     const ctx = gsap.context(() => {
+      // Hero intro on load.
+      gsap.from('[data-anim]', {
+        y: 48,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        stagger: 0.12,
+        delay: 0.15,
+      })
+
       // Parallax: media drifts slower than the page (kept oversized so no gaps).
       gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((el) => {
         gsap.set(el, { scale: 1.2 })
@@ -47,6 +59,19 @@ export function MotionProvider() {
           duration: 0.9,
           ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+        })
+      })
+
+      // Word-by-word reveal.
+      gsap.utils.toArray<HTMLElement>('[data-words]').forEach((el) => {
+        const words = el.querySelectorAll('span')
+        gsap.from(words, {
+          yPercent: 110,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          stagger: 0.06,
+          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
         })
       })
 

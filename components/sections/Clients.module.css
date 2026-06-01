@@ -1,70 +1,67 @@
-/* Logo wall / brand grid — thin hairline grid drawn with a single shared border. */
-.grid {
+.marquee {
+  margin-top: var(--s4);
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* Collapse the outer/inner borders so cells share a single hairline. */
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
+  width: max-content;
+  animation: scroll 36s linear infinite;
 }
 
-@media (min-width: 720px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.cell {
-  position: relative;
-  background: var(--bg);
-  display: flex;
-  flex-direction: column;
+.chip {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--s1);
-  text-align: center;
-  padding: var(--s5) var(--s3);
-  min-height: 9rem;
-  transition: background 0.3s ease, color 0.3s ease;
+  padding: 0 var(--s2);
 }
 
-.cell:hover {
-  background: var(--bg-elev);
-}
-
-/* Placeholder / text treatment for clients without a logo. */
 .name {
   font-family: var(--serif);
-  font-size: clamp(1rem, 1.6vw, 1.35rem);
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3.2vw, 2.4rem);
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+.chip:hover .name {
   color: var(--fg);
-  text-transform: uppercase;
-  line-height: 1.15;
 }
 
-/* Real logo: muted by default, lifts to full presence on hover. */
 .logo {
-  max-width: 70%;
-  max-height: 3rem;
+  height: clamp(28px, 4vw, 44px);
   width: auto;
   object-fit: contain;
   filter: grayscale(1);
-  opacity: 0.65;
+  opacity: 0.7;
   transition: filter 0.3s ease, opacity 0.3s ease;
 }
-
-.cell:hover .logo {
-  filter: grayscale(0);
+.chip:hover .logo {
+  filter: none;
   opacity: 1;
 }
 
-.sector {
-  font-family: var(--sans);
-  font-size: 0.62rem;
-  letter-spacing: var(--track);
-  text-transform: uppercase;
-  color: var(--muted);
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    flex-wrap: wrap;
+  }
 }

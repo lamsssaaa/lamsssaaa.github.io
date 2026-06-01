@@ -15,21 +15,21 @@ export function Hero({ lang }: { lang: Lang }) {
 
       <div className={`container ${styles.content}`}>
         <div className={styles.lead}>
-          <p className={styles.role}>
+          <p className={styles.role} data-anim>
             <span aria-hidden="true">↳ </span>
             {profile.badge[lang]}
           </p>
-          <h1 className={styles.headline}>
+          <h1 className={styles.headline} data-anim>
             {lines.map((line, i) => (
               <span key={i} className={styles.line}>
                 {line}
               </span>
             ))}
           </h1>
-          <p className={styles.tagline}>{profile.tagline[lang]}</p>
+          <p className={styles.tagline} data-anim>{profile.tagline[lang]}</p>
         </div>
 
-        <div className={styles.bottom}>
+        <div className={styles.bottom} data-anim>
           <div className={styles.metaCol}>
             <a href="#work" className={styles.cta}>
               {profile.cta[lang]} →

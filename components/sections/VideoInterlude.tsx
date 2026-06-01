@@ -30,7 +30,11 @@ export function VideoInterlude({
       </div>
       <div className={`container ${styles.content}`}>
         {kicker && <span className={styles.kicker}>{kicker}</span>}
-        <p className={styles.caption}>{caption}</p>
+        <p className={styles.caption} data-words>
+          {caption.split(' ').map((w, i) => (
+            <span key={i}>{w}&nbsp;</span>
+          ))}
+        </p>
       </div>
     </section>
   )
