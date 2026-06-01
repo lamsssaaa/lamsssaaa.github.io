@@ -84,32 +84,31 @@ export function MotionProvider() {
       ScrollTrigger.refresh()
     })
 
-    // 3D perspective carousel: pin the work section and rotate the ring of
-    // project cards as you scroll (the turning "spiral staircase"). Desktop only.
+    // Diagonal travel: each project card rides a diagonal as you scroll its
+    // slot — 0% bottom-right, 50% centered, 100% top-left. Desktop only.
     const mm = gsap.matchMedia()
     mm.add('(min-width: 760px)', () => {
-      const section = document.querySelector<HTMLElement>('[data-carousel]')
-      const ring = document.querySelector<HTMLElement>('[data-ring]')
-      if (!section || !ring) return
-      section.setAttribute('data-c', 'on')
-      const n = ring.children.length || 1
-      const tween = gsap.to(ring, {
-        rotationY: -360,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          pin: true,
-          scrub: 1,
-          start: 'top top',
-          end: () => '+=' + window.innerHeight * n,
-          invalidateOnRefresh: true,
-        },
+      const tweens = gsap.utils.toArray<HTMLElement>('[data-diag]').map((rect) => {
+        const slot = rect.closest('[data-slot]') as HTMLElement | null
+        return gsap.fromTo(
+          rect,
+          { x: () => window.innerWidth * 0.42, y: () => window.innerHeight * 0.45, rotateZ: 2 },
+          {
+            x: () => -window.innerWidth * 0.42,
+            y: () => -window.innerHeight * 0.45,
+            rotateZ: -2,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: slot ?? rect,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          },
+        )
       })
-      return () => {
-        section.removeAttribute('data-c')
-        tween.scrollTrigger?.kill()
-        tween.kill()
-      }
+      return () => tweens.forEach((t) => { t.scrollTrigger?.kill(); t.kill() })
     })
 
     return () => {
