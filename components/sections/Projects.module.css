@@ -11,6 +11,11 @@
   align-items: flex-end;
   overflow: hidden;
   border-top: 1px solid var(--line);
+  transition: opacity 0.45s ease;
+}
+/* Hovering one project dims the others (premium agency feel). */
+.stack:hover .block:not(:hover) {
+  opacity: 0.45;
 }
 .block:last-child {
   border-bottom: 1px solid var(--line);
@@ -72,6 +77,26 @@
 }
 
 .meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--s2);
+}
+.view {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+  border-bottom: 1px solid var(--fg);
+  padding-bottom: 2px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.block:hover .view {
+  opacity: 1;
+  transform: none;
+}
+.metaRow {
   display: flex;
   align-items: center;
   gap: var(--s2);

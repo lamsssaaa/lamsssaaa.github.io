@@ -9,6 +9,8 @@ import styles from './Projects.module.css'
  * overlaid. Drop files in /public/video/work-N-*.mp4; until then the neon
  * poster shows. Quality adapts to the visitor's connection.
  */
+const VIEW = { fr: 'Voir le projet', en: 'View project' } as const
+
 export function Projects({ lang }: { lang: Lang }) {
   return (
     <section id="work" className="section">
@@ -35,8 +37,11 @@ export function Projects({ lang }: { lang: Lang }) {
                 <p className={styles.line}>{p.line[lang]}</p>
               </div>
               <div className={styles.meta}>
-                <span className={styles.client}>{p.client[lang]}</span>
-                <span className={styles.tag}>{p.tag[lang]}</span>
+                <span className={styles.view}>{VIEW[lang]} →</span>
+                <div className={styles.metaRow}>
+                  <span className={styles.client}>{p.client[lang]}</span>
+                  <span className={styles.tag}>{p.tag[lang]}</span>
+                </div>
               </div>
             </div>
           </article>
