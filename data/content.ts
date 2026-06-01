@@ -73,6 +73,10 @@ export const profile = {
     en: 'Faster than an agency. Broader than a freelancer.',
   } as Localized<string>,
   location: { fr: 'Genève, Suisse', en: 'Geneva, Switzerland' } as Localized<string>,
+  /** Small badge line above the headline (your own words). */
+  badge: { fr: 'Disponible pour vos projets', en: 'Available for new projects' } as Localized<string>,
+  /** Primary hero call-to-action → jumps to the work section. */
+  cta: { fr: 'Voir les travaux', en: 'View work' } as Localized<string>,
   /** Hero stat counters — edit the numbers to your real figures. */
   stats: [
     { value: '〈50〉+', label: { fr: 'Projets', en: 'Projects' } },
