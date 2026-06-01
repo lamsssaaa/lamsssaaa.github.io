@@ -11,8 +11,6 @@ import { Testimonials } from '../../components/sections/Testimonials'
 import { Contact } from '../../components/sections/Contact'
 import { BriefForm } from '../../components/sections/BriefForm'
 
-export const revalidate = 3600
-
 const COPY = {
   fr: { kicker: 'Méthode', caption: 'Une seule personne, de A à Z.' },
   en: { kicker: 'Method', caption: 'One person, end to end.' },
