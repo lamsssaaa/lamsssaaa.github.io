@@ -27,7 +27,7 @@ export function Contact({ lang }: { lang: Lang }) {
   return (
     <section id="contact" className="section">
       <div className="container">
-        <span className="section-index">07 — {contact.heading[lang]}</span>
+        <span className="section-index">08 — {contact.heading[lang]}</span>
 
         <p className={styles.intro}>{contact.intro[lang]}</p>
 

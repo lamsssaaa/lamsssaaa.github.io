@@ -12,7 +12,7 @@ export function About({ lang }: { lang: Lang }) {
   return (
     <section id="about" className="section">
       <div className="container">
-        <span className="section-index">05 — {heading}</span>
+        <span className="section-index">06 — {heading}</span>
         <h2 className="section-title">{heading}</h2>
 
         <div className={styles.intro}>

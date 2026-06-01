@@ -130,7 +130,7 @@ export function BriefForm({ lang }: { lang: Lang }) {
   return (
     <section id="brief" className="section">
       <div className="container">
-        <span className="section-index">08 — {briefHeading[lang]}</span>
+        <span className="section-index">09 — {briefHeading[lang]}</span>
         <h2 className="section-title">{briefHeading[lang]}</h2>
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>

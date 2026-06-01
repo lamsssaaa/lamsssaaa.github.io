@@ -7,7 +7,7 @@ export function Services({ lang }: { lang: Lang }) {
   return (
     <section id="services" className="section">
       <div className="container">
-        <span className="section-index">02 — {servicesHeading[lang]}</span>
+        <span className="section-index">03 — {lang === 'fr' ? 'Services' : 'Services'}</span>
         <h2 className="section-title">{servicesHeading[lang]}</h2>
 
         <ol className={styles.list}>
@@ -17,8 +17,8 @@ export function Services({ lang }: { lang: Lang }) {
                 <span className={styles.num} aria-hidden="true">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className={styles.problem}>{service.problem[lang]}</p>
-                <p className={styles.solution}>{service.solution[lang]}</p>
+                <h3 className={styles.title}>{service.title[lang]}</h3>
+                <p className={styles.desc}>{service.desc[lang]}</p>
               </Reveal>
             </li>
           ))}

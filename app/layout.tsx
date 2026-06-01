@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from 'next'
-import { Playfair_Display, Inter } from 'next/font/google'
+import { Space_Grotesk, Inter } from 'next/font/google'
 import './globals.css'
 
-const serif = Playfair_Display({
+// Headings use a neutral grotesque (Neue-Montreal-like), matching the reference.
+const serif = Space_Grotesk({
   variable: '--font-serif',
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['500', '700'],
   display: 'swap',
 })
 

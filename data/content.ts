@@ -9,8 +9,19 @@ import type { Localized } from '../lib/i18n'
  */
 
 export interface ServiceItem {
-  problem: Localized<string>
-  solution: Localized<string>
+  title: Localized<string>
+  desc: Localized<string>
+}
+
+export interface ProjectItem {
+  /** Project / case-study name. */
+  name: string
+  client: Localized<string>
+  tag: Localized<string>
+  /** Showcase video (adaptive). Drop files in /public/video. Poster optional. */
+  videoHigh?: string
+  videoLow?: string
+  poster?: string
 }
 
 export interface ClientItem {
@@ -118,32 +129,46 @@ export const about = {
 }
 
 // ── Services ──────────────────────────────────────────────────────────────────
-export const servicesHeading = { fr: 'Services', en: 'Services' } as Localized<string>
+export const servicesHeading = {
+  fr: 'Tout le e-commerce. À 360°.',
+  en: 'All of e-commerce. 360°.',
+} as Localized<string>
 export const services: ServiceItem[] = [
   {
-    problem: { fr: 'Des ventes qui stagnent.', en: 'Sales that have plateaued.' },
-    solution: { fr: 'Acquisition payante (Meta, Google, TikTok) pilotée par la donnée.', en: 'Data-driven paid acquisition (Meta, Google, TikTok).' },
+    title: { fr: 'Vendre plus, partout', en: 'Sell more, everywhere' },
+    desc: { fr: 'Acquisition payante pilotée par la donnée — Meta, Google, TikTok.', en: 'Data-driven paid acquisition — Meta, Google, TikTok.' },
   },
   {
-    problem: { fr: 'Un site qui ne convertit pas.', en: 'A site that doesn’t convert.' },
-    solution: { fr: 'Optimisation du tunnel et des pages produit (CRO).', en: 'Funnel & product-page optimization (CRO).' },
+    title: { fr: 'Une boutique qui convertit', en: 'A store that converts' },
+    desc: { fr: 'Création et optimisation de boutique e-commerce (CRO, pages produit).', en: 'E-commerce store build & conversion optimization (CRO, product pages).' },
   },
   {
-    problem: { fr: 'Pas de boutique en ligne.', en: 'No online store yet.' },
-    solution: { fr: 'Création de boutique e-commerce rapide et performante.', en: 'Fast, high-performance e-commerce store build.' },
+    title: { fr: 'Une marque mémorable', en: 'A brand that sticks' },
+    desc: { fr: 'Identité, contenu et création publicitaire — vidéo incluse.', en: 'Identity, content and ad creative — video included.' },
   },
   {
-    problem: { fr: 'Du contenu qui ne sort pas.', en: 'Content that never ships.' },
-    solution: { fr: 'Production de contenu & créa publicitaire (vidéo incluse).', en: 'Content & ad-creative production (video included).' },
+    title: { fr: 'Percer sur les réseaux', en: 'Break out on social' },
+    desc: { fr: 'Stratégie de contenu et formats qui captent l’attention.', en: 'Content strategy and formats that capture attention.' },
   },
   {
-    problem: { fr: 'Des tâches répétitives.', en: 'Repetitive manual work.' },
-    solution: { fr: 'Automatisation & intégrations (IA, e-mails, CRM).', en: 'Automation & integrations (AI, email, CRM).' },
+    title: { fr: 'L’IA à votre service', en: 'AI working for you' },
+    desc: { fr: 'Automatisations et intégrations qui font gagner des heures.', en: 'Automations and integrations that save hours.' },
   },
   {
-    problem: { fr: 'Aucune visibilité sur les chiffres.', en: 'No visibility on the numbers.' },
-    solution: { fr: 'Analytics, tracking et reporting clairs.', en: 'Clear analytics, tracking and reporting.' },
+    title: { fr: 'Vos chiffres, au clair', en: 'Your numbers, clear' },
+    desc: { fr: 'Analytics, tracking et reporting pour décider juste.', en: 'Analytics, tracking and reporting to decide well.' },
   },
+]
+
+// ── Projects / recent work ────────────────────────────────────────────────────
+export const projectsHeading = { fr: 'Travaux récents', en: 'Recent work' } as Localized<string>
+export const projects: ProjectItem[] = [
+  { name: '〈Projet 1〉', client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'E-commerce', en: 'E-commerce' }, videoHigh: '/video/work-1-high.mp4', videoLow: '/video/work-1-low.mp4' },
+  { name: '〈Projet 2〉', client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Publicité', en: 'Advertising' }, videoHigh: '/video/work-2-high.mp4', videoLow: '/video/work-2-low.mp4' },
+  { name: '〈Projet 3〉', client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Site web', en: 'Website' }, videoHigh: '/video/work-3-high.mp4', videoLow: '/video/work-3-low.mp4' },
+  { name: '〈Projet 4〉', client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Contenu', en: 'Content' }, videoHigh: '/video/work-4-high.mp4', videoLow: '/video/work-4-low.mp4' },
+  { name: '〈Projet 5〉', client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Growth', en: 'Growth' }, videoHigh: '/video/work-5-high.mp4', videoLow: '/video/work-5-low.mp4' },
+  { name: '〈Projet 6〉', client: { fr: '〈Client〉', en: '〈Client〉' }, tag: { fr: 'Branding', en: 'Branding' }, videoHigh: '/video/work-6-high.mp4', videoLow: '/video/work-6-low.mp4' },
 ]
 
 // ── Clients / companies worked with ───────────────────────────────────────────

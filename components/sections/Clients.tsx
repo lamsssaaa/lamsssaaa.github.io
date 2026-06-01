@@ -7,7 +7,7 @@ export function Clients({ lang }: { lang: Lang }) {
   return (
     <section id="clients" className="section">
       <div className="container">
-        <span className="section-index">03 — {clientsHeading[lang]}</span>
+        <span className="section-index">04 — {clientsHeading[lang]}</span>
         <h2 className="section-title">{clientsHeading[lang]}</h2>
 
         <Reveal>

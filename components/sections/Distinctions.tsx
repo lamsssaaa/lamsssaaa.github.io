@@ -7,7 +7,7 @@ export function Distinctions({ lang }: { lang: Lang }) {
   return (
     <section id="distinctions" className="section">
       <div className="container">
-        <span className="section-index">04 — {distinctionsHeading[lang]}</span>
+        <span className="section-index">05 — {distinctionsHeading[lang]}</span>
         <h2 className="section-title">{distinctionsHeading[lang]}</h2>
 
         <ol className={styles.list}>

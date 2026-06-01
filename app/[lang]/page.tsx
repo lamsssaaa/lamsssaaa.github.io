@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { isLang, type Lang } from '../../lib/i18n'
 import { Hero } from '../../components/sections/Hero'
+import { Projects } from '../../components/sections/Projects'
 import { Services } from '../../components/sections/Services'
 import { VideoInterlude } from '../../components/sections/VideoInterlude'
 import { Clients } from '../../components/sections/Clients'
@@ -13,18 +14,8 @@ import { BriefForm } from '../../components/sections/BriefForm'
 export const revalidate = 3600
 
 const COPY = {
-  fr: {
-    reel1Kicker: 'En images',
-    reel1: 'Des marques qui décollent, de l’idée à la vente.',
-    reel2Kicker: 'Méthode',
-    reel2: 'Une seule personne, de A à Z.',
-  },
-  en: {
-    reel1Kicker: 'In motion',
-    reel1: 'Brands that take off — from idea to sale.',
-    reel2Kicker: 'Method',
-    reel2: 'One person, end to end.',
-  },
+  fr: { kicker: 'Méthode', caption: 'Une seule personne, de A à Z.' },
+  en: { kicker: 'Method', caption: 'One person, end to end.' },
 } as const
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
@@ -35,22 +26,16 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   return (
     <>
       <Hero lang={l} />
+      <Projects lang={l} />
       <Services lang={l} />
-      <VideoInterlude
-        id="reel"
-        high="/video/reel-1-high.mp4"
-        low="/video/reel-1-low.mp4"
-        kicker={c.reel1Kicker}
-        caption={c.reel1}
-      />
       <Clients lang={l} />
       <Distinctions lang={l} />
       <About lang={l} />
       <VideoInterlude
         high="/video/reel-2-high.mp4"
         low="/video/reel-2-low.mp4"
-        kicker={c.reel2Kicker}
-        caption={c.reel2}
+        kicker={c.kicker}
+        caption={c.caption}
       />
       <Testimonials lang={l} />
       <Contact lang={l} />

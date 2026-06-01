@@ -7,7 +7,7 @@ export function Testimonials({ lang }: { lang: Lang }) {
   return (
     <section id="testimonials" className="section">
       <div className="container">
-        <span className="section-index">06 — {testimonialsHeading[lang]}</span>
+        <span className="section-index">07 — {testimonialsHeading[lang]}</span>
         <h2 className="section-title">{testimonialsHeading[lang]}</h2>
 
         <Reveal>

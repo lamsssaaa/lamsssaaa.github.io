@@ -7,8 +7,8 @@ import { ThemeToggle } from './ThemeToggle'
 import styles from './Header.module.css'
 
 const NAV = [
+  { id: 'work', key: 'work' },
   { id: 'services', key: 'services' },
-  { id: 'clients', key: 'clients' },
   { id: 'distinctions', key: 'distinctions' },
   { id: 'about', key: 'about' },
   { id: 'contact', key: 'contact' },
