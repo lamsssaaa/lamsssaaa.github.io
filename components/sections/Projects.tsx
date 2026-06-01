@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react'
 import { type Lang } from '../../lib/i18n'
 import { projectsHeading, projects } from '../../data/content'
 import { AdaptiveVideo } from '../AdaptiveVideo'
+import { resolveProjectBg } from '../../lib/assets'
 import styles from './Projects.module.css'
 
 /**
@@ -24,13 +25,22 @@ export function Projects({ lang }: { lang: Lang }) {
       </div>
 
       <div className={styles.stage} data-stage>
-        {/* 1. Full-bleed backgrounds (one per project, crossfading). */}
-        {projects.map((p, i) => (
-          <div key={`bg-${i}`} className={styles.bg} data-bg style={v(i)}>
-            <AdaptiveVideo high={p.videoHigh ?? '/video/hero-high.mp4'} low={p.videoLow ?? '/video/hero-low.mp4'} poster={p.poster ?? '/video/hero-poster.svg'} />
-            <div className={styles.bgShade} />
-          </div>
-        ))}
+        {/* 1. Full-bleed backgrounds (one per project, crossfading). Resolved at
+            build: /videos/background-N.mp4 → /images/background-N.webp → cover. */}
+        {projects.map((p, i) => {
+          const bg = resolveProjectBg(i + 1, p.poster ?? '/video/hero-poster.svg')
+          return (
+            <div key={`bg-${i}`} className={styles.bg} data-bg style={v(i)}>
+              {bg.video ? (
+                <AdaptiveVideo high={bg.video} low={bg.video} poster={bg.image} />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img className={styles.bgImg} src={bg.image} alt="" aria-hidden="true" />
+              )}
+              <div className={styles.bgShade} />
+            </div>
+          )
+        })}
 
         {/* 2. Big bottom-left title for the active project. */}
         {projects.map((p, i) => (
