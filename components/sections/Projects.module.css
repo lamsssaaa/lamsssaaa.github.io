@@ -141,8 +141,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(82vw, 1240px);
-  height: min(60svh, 620px);
+  width: min(60vw, 1000px);
+  height: min(58svh, 580px);
   min-height: 0;
   border: 1px solid var(--line);
   border-radius: 12px;

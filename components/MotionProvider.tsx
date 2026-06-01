@@ -97,9 +97,9 @@ export function MotionProvider() {
       const titles = gsap.utils.toArray<HTMLElement>('[data-bigtitle]')
       if (!section || !cards.length) return
       section.setAttribute('data-on', '')
-      const STEP = 0.4
+      const STEP = 0.45
       const total = (cards.length - 1) * STEP + 1
-      const ax = () => window.innerWidth * 0.52
+      const ax = () => window.innerWidth * 0.6
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -114,14 +114,14 @@ export function MotionProvider() {
 
       cards.forEach((card, i) => {
         const at = i * STEP
-        // Vertical arc amplitude (about a third of the viewport).
-        const ay = () => window.innerHeight * 0.34
+        // Vertical arc amplitude (half the viewport → more space between projects).
+        const ay = () => window.innerHeight * 0.5
         // Diagonal position + 3D flip. Linear rotateY ramp that reads as 65° at
         // -10%, 0° at 50%, -65° at 110% → ~±54° at the visible edges.
         tl.fromTo(
           card,
-          { xPercent: -50, yPercent: -50, x: () => ax(), y: () => ay(), rotationY: 54, transformPerspective: 1200, transformOrigin: 'center center' },
-          { xPercent: -50, yPercent: -50, x: () => -ax(), y: () => -ay(), rotationY: -54, transformPerspective: 1200, ease: 'none', duration: 1 },
+          { xPercent: -50, yPercent: -50, x: () => ax(), y: () => ay(), rotationY: 50, transformPerspective: 1200, transformOrigin: 'center center' },
+          { xPercent: -50, yPercent: -50, x: () => -ax(), y: () => -ay(), rotationY: -50, transformPerspective: 1200, ease: 'none', duration: 1 },
           at,
         )
         // Opacity curve + fisheye bulge (taller than wide → bigger top/bottom).
