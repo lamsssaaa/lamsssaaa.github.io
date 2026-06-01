@@ -24,7 +24,7 @@ export function VideoInterlude({
   return (
     <section className={styles.interlude} id={id}>
       <div className="ambient" />
-      <div className={styles.media}>
+      <div className={styles.media} data-parallax>
         <AdaptiveVideo high={high} low={low} poster={poster} />
         <div className={styles.scrim} />
       </div>

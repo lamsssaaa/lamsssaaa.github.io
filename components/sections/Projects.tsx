@@ -17,7 +17,7 @@ export function Projects({ lang }: { lang: Lang }) {
 
         <div className={styles.grid}>
           {projects.map((p) => (
-            <article key={p.name} className={styles.card}>
+            <article key={p.name} className={styles.card} data-fx="rise">
               <div className={styles.media}>
                 <AdaptiveVideo
                   high={p.videoHigh ?? '/video/hero-high.mp4'}
