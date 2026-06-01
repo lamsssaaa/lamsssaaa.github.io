@@ -1,43 +1,66 @@
-.stack {
+.stage {
   margin-top: var(--s5);
+}
+
+/* Default / fallback: clean vertical stack (mobile, reduced-motion, no-JS). */
+.ring {
   display: flex;
   flex-direction: column;
 }
-
-.panel {
+.card {
   position: relative;
-  min-height: 82svh;
+  min-height: 80svh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
   border-top: 1px solid var(--line);
-  transition: opacity 0.45s ease;
 }
-.panel:last-child {
+.card:last-child {
   border-bottom: 1px solid var(--line);
 }
-.stack:hover .panel:not(:hover) {
-  opacity: 0.5;
+
+/* ── 3D perspective carousel — enabled by MotionProvider on desktop ── */
+[data-c='on'] .stage {
+  margin-top: 0;
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+  perspective: 1600px;
+}
+[data-c='on'] .ring {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+}
+[data-c='on'] .card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(62vw, 560px);
+  height: min(60svh, 380px);
+  min-height: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  transform: translate(-50%, -50%) rotateY(calc(360deg * var(--i) / var(--n))) translateZ(520px);
+  backface-visibility: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
 }
 
 .media {
   position: absolute;
   inset: 0;
   z-index: 0;
-}
-.media > :global(*) {
-  transition: transform 0.7s ease;
-}
-.panel:hover .media > :global(*) {
-  transform: scale(1.05);
+  overflow: hidden;
+  border-radius: inherit;
 }
 .shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.1) 45%, rgba(0, 0, 0, 0.85) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.05) 45%, rgba(0, 0, 0, 0.85) 100%);
 }
 [data-theme='light'] .shade {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(246, 245, 241, 0.82) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(246, 245, 241, 0.85) 100%);
 }
 
 .overlay {
@@ -45,16 +68,9 @@
   z-index: 1;
   width: 100%;
   padding: var(--s5) var(--gutter);
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--s3);
-  flex-wrap: wrap;
-  will-change: transform, opacity;
 }
-
-.lead {
-  max-width: 24ch;
+[data-c='on'] .overlay {
+  padding: var(--s3);
 }
 .idx {
   display: block;
@@ -65,37 +81,21 @@
 }
 .name {
   margin: 0;
-  font-size: clamp(2rem, 6vw, 4.2rem);
+  font-size: clamp(1.8rem, 5vw, 4rem);
   line-height: 0.98;
   letter-spacing: -0.02em;
+}
+[data-c='on'] .name {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
 }
 .line {
   margin: var(--s2) 0 0;
   color: var(--muted);
   font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+  max-width: 30ch;
 }
-
 .meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--s2);
-}
-.view {
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
-  color: var(--fg);
-  border-bottom: 1px solid var(--fg);
-  padding-bottom: 2px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.panel:hover .view {
-  opacity: 1;
-  transform: none;
-}
-.metaRow {
+  margin-top: var(--s3);
   display: flex;
   align-items: center;
   gap: var(--s2);

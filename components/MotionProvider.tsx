@@ -84,8 +84,37 @@ export function MotionProvider() {
       ScrollTrigger.refresh()
     })
 
+    // 3D perspective carousel: pin the work section and rotate the ring of
+    // project cards as you scroll (the turning "spiral staircase"). Desktop only.
+    const mm = gsap.matchMedia()
+    mm.add('(min-width: 760px)', () => {
+      const section = document.querySelector<HTMLElement>('[data-carousel]')
+      const ring = document.querySelector<HTMLElement>('[data-ring]')
+      if (!section || !ring) return
+      section.setAttribute('data-c', 'on')
+      const n = ring.children.length || 1
+      const tween = gsap.to(ring, {
+        rotationY: -360,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          pin: true,
+          scrub: 1,
+          start: 'top top',
+          end: () => '+=' + window.innerHeight * n,
+          invalidateOnRefresh: true,
+        },
+      })
+      return () => {
+        section.removeAttribute('data-c')
+        tween.scrollTrigger?.kill()
+        tween.kill()
+      }
+    })
+
     return () => {
       ctx.revert()
+      mm.revert()
       gsap.ticker.remove(tick)
       lenis.destroy()
     }
