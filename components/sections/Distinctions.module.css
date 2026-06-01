@@ -1,0 +1,63 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  border-top: 1px solid var(--line);
+}
+.row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+/* Reveal wrapper carries the grid so each row animates as a unit. */
+.reveal {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s2);
+  padding: var(--s4) 0;
+}
+
+.year {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  letter-spacing: var(--track);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  padding-top: 0.35rem;
+}
+
+.body {
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  line-height: 1.15;
+  color: var(--fg);
+  margin: 0;
+}
+
+.issuer {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: var(--s1) 0 0;
+}
+
+.detail {
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 60ch;
+  margin: var(--s2) 0 0;
+}
+
+/* Desktop: fixed year column on the left. */
+@media (min-width: 720px) {
+  .reveal {
+    grid-template-columns: 120px 1fr;
+    gap: var(--s4);
+    padding: var(--s5) 0;
+  }
+}

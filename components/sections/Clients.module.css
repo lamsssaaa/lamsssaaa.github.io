@@ -1,0 +1,70 @@
+/* Logo wall / brand grid — thin hairline grid drawn with a single shared border. */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Collapse the outer/inner borders so cells share a single hairline. */
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.cell {
+  position: relative;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s1);
+  text-align: center;
+  padding: var(--s5) var(--s3);
+  min-height: 9rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.cell:hover {
+  background: var(--bg-elev);
+}
+
+/* Placeholder / text treatment for clients without a logo. */
+.name {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+/* Real logo: muted by default, lifts to full presence on hover. */
+.logo {
+  max-width: 70%;
+  max-height: 3rem;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.65;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.cell:hover .logo {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.sector {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--muted);
+}

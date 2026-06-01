@@ -1,0 +1,104 @@
+.track {
+  display: flex;
+  gap: var(--s4);
+  margin: var(--s5) 0 0;
+  padding: 0 0 var(--s3);
+  list-style: none;
+
+  /* Horizontal scroll-snap carousel — no JS. */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+/* Let the row bleed to the viewport edge so cards scroll out of frame. */
+.track {
+  margin-right: calc(var(--gutter) * -1);
+  padding-right: var(--gutter);
+}
+
+.track:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: var(--s2);
+}
+
+.track::-webkit-scrollbar {
+  height: 6px;
+}
+.track::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+}
+.track::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: min(85vw, 30rem);
+  padding: var(--s5);
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+
+.quote {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+  line-height: 1.35;
+  color: var(--fg);
+  margin: 0 0 var(--s4);
+  flex: 1 1 auto;
+  text-wrap: balance;
+}
+.quote::before {
+  content: '\201C';
+}
+.quote::after {
+  content: '\201D';
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-style: normal;
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
+}
+
+.name {
+  color: var(--fg);
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+}
+
+.title {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.date {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  margin-top: var(--s2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    scroll-behavior: auto;
+  }
+}

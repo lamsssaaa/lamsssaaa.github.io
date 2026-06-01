@@ -1,0 +1,113 @@
+.intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s5);
+  align-items: start;
+}
+
+@media (min-width: 800px) {
+  .intro {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: var(--s6);
+  }
+}
+
+.bio {
+  max-width: 60ch;
+}
+
+.lead {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 2.6vw, 1.7rem);
+  line-height: 1.35;
+  color: var(--fg);
+  margin: 0 0 var(--s4);
+}
+
+.body {
+  color: var(--muted);
+  margin: 0 0 var(--s3);
+  max-width: 56ch;
+}
+.body:last-child {
+  margin-bottom: 0;
+}
+
+.photo {
+  margin: 0;
+}
+
+.photoImg {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  object-fit: cover;
+}
+
+/* ── Experience timeline ─────────────────────────────────────────────────── */
+.experience {
+  margin-top: var(--s6);
+}
+
+.experienceHeading {
+  font-size: 0.7rem;
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 var(--s3);
+}
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s2);
+  padding: var(--s4) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 720px) {
+  .entry {
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: var(--s4);
+  }
+}
+
+.period {
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+  padding-top: 0.2rem;
+}
+
+.entryBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1);
+}
+
+.company {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  line-height: 1.1;
+  color: var(--fg);
+}
+
+.role {
+  display: block;
+}
+
+.detail {
+  color: var(--muted);
+  margin: var(--s1) 0 0;
+  max-width: 56ch;
+}

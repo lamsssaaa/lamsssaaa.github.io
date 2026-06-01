@@ -1,0 +1,114 @@
+.intro {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 4.2vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  max-width: 24ch;
+  margin: 0 0 var(--s4);
+  color: var(--fg);
+}
+
+/* The email is the hero of this section — large, serif, clickable. */
+.emailHero {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 9vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  word-break: break-word;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--s2);
+  transition: opacity 0.2s ease, border-color 0.3s ease;
+}
+.emailHero:hover {
+  opacity: 0.6;
+  border-bottom-color: var(--fg);
+}
+
+.channels {
+  list-style: none;
+  margin: var(--s6) 0 0;
+  padding: 0;
+  max-width: 640px;
+}
+
+.channel {
+  border-top: 1px solid var(--line);
+}
+.channel:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.channelLink {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding: var(--s3) 0;
+  color: var(--fg);
+  transition: opacity 0.2s ease;
+}
+.channelLink:hover {
+  opacity: 0.65;
+}
+
+.channelLabel {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--muted);
+  flex: 0 0 auto;
+  width: 9rem;
+  align-self: center;
+}
+
+.channelValue {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease;
+  word-break: break-word;
+}
+.channelLink:hover .channelValue {
+  border-bottom-color: var(--fg);
+}
+
+.arrow {
+  margin-left: auto;
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  color: var(--muted);
+  transform: translateX(0);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+.channelLink:hover .arrow {
+  transform: translateX(4px);
+  color: var(--fg);
+}
+
+@media (max-width: 560px) {
+  .channelLink {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s1);
+  }
+  .channelLabel {
+    width: auto;
+    align-self: auto;
+  }
+  .arrow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .emailHero,
+  .channelLink,
+  .arrow,
+  .channelValue {
+    transition: none;
+  }
+}
