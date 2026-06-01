@@ -76,6 +76,20 @@
 }
 
 /* ── Desktop vortex (enabled by MotionProvider via [data-on]) ── */
+/* Pinned: drop the section padding and float the heading so .stage sits flush
+   with the top of the section. */
+:global([data-diag-section][data-on]) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+:global([data-diag-section][data-on] .container) {
+  position: absolute;
+  top: 88px;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  pointer-events: none;
+}
 [data-diag-section][data-on] .stage {
   margin-top: 0;
   position: relative;
