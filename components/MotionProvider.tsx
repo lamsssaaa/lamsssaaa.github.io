@@ -122,20 +122,22 @@ export function MotionProvider() {
         // -10%, 0° at 50%, -65° at 110% → ~±54° at the visible edges.
         tl.fromTo(
           card,
-          { xPercent: -50, yPercent: -50, x: () => ax(), y: () => ay(), rotationY: 50, transformPerspective: 1200, transformOrigin: 'center center' },
-          { xPercent: -50, yPercent: -50, x: () => -ax(), y: () => -ay(), rotationY: -50, transformPerspective: 1200, ease: 'none', duration: 1 },
+          { xPercent: -50, yPercent: -50, x: () => ax(), y: () => ay(), rotationY: 37.5, transformPerspective: 1200, transformOrigin: 'center center' },
+          { xPercent: -50, yPercent: -50, x: () => -ax(), y: () => -ay(), rotationY: -37.5, transformPerspective: 1200, ease: 'none', duration: 1 },
           at,
         )
         // Opacity curve + fisheye bulge (taller than wide → bigger top/bottom).
         const e = 'none'
-        // Cards stay opaque — they're hidden by sliding off the side, not by
-        // fading. Just a quick fade at the very edges to avoid a hard pop.
         tl.set(card, { opacity: 0, scaleX: 0.9, scaleY: 0.9, borderRadius: 14, zIndex: 1 }, at)
-        tl.to(card, { opacity: 1, scaleX: 0.94, scaleY: 0.95, zIndex: 2, duration: 0.05, ease: e }, at)
+        // Opacity: 0% → 0, 20% → 1, 80% → 1, 100% → 0.
+        tl.to(card, { opacity: 1, duration: 0.2, ease: e }, at)
+        tl.to(card, { opacity: 0, duration: 0.2, ease: e }, at + 0.8)
+        // Scale bulge + z-index (centered card on top).
+        tl.to(card, { scaleX: 0.94, scaleY: 0.95, zIndex: 2, duration: 0.05, ease: e }, at)
         tl.to(card, { scaleX: 1, scaleY: 1.02, borderRadius: 18, zIndex: 10, duration: 0.35, ease: e }, at + 0.05)
         tl.to(card, { scaleX: 1, scaleY: 1.02, duration: 0.2, ease: e }, at + 0.4) // hold at center (40–60%)
         tl.to(card, { scaleX: 0.94, scaleY: 0.95, zIndex: 2, duration: 0.3, ease: e }, at + 0.6)
-        tl.to(card, { opacity: 0, scaleX: 0.9, scaleY: 0.9, duration: 0.05, ease: e }, at + 0.95)
+        tl.to(card, { scaleX: 0.9, scaleY: 0.9, duration: 0.05, ease: e }, at + 0.95)
 
         // Full-bleed background of the active project (crossfade, peak at center).
         const bg = bgs[i]
