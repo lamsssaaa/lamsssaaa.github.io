@@ -97,8 +97,7 @@ export function MotionProvider() {
       section.setAttribute('data-on', '')
       const STEP = 0.4
       const total = (cards.length - 1) * STEP + 1
-      const ax = () => window.innerWidth * 0.42
-      const ay = () => window.innerHeight * 0.45
+      const ax = () => window.innerWidth * 0.36
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -113,21 +112,24 @@ export function MotionProvider() {
 
       cards.forEach((card, i) => {
         const at = i * STEP
-        // Diagonal position (linear): bottom-right → center → top-left.
+        // Vertical amplitude tied to card height: neighbours (0.4 apart) end up
+        // ~50% of a card height apart vertically (staircase offset).
+        const ay = () => (card.offsetHeight || 440) * 0.6
+        // Diagonal position + 3D flip: rotateY 90° → 0° (at 50%) → -90°.
         tl.fromTo(
           card,
-          { xPercent: -50, yPercent: -50, x: () => ax(), y: () => ay(), rotateZ: 3 },
-          { xPercent: -50, yPercent: -50, x: () => -ax(), y: () => -ay(), rotateZ: -3, ease: 'none', duration: 1 },
+          { xPercent: -50, yPercent: -50, x: () => ax(), y: () => ay(), rotationY: 90, transformPerspective: 1200, transformOrigin: 'center center' },
+          { xPercent: -50, yPercent: -50, x: () => -ax(), y: () => -ay(), rotationY: -90, transformPerspective: 1200, ease: 'none', duration: 1 },
           at,
         )
-        // Opacity curve + fisheye bulge + z-index (centered card on top).
+        // Opacity curve + stronger fisheye bulge + z-index (centered on top).
         const e = 'none'
-        tl.set(card, { opacity: 0, scale: 0.7, zIndex: 1 }, at)
-        tl.to(card, { opacity: 0.2, scale: 0.78, zIndex: 2, duration: 0.1, ease: e }, at)
-        tl.to(card, { opacity: 1, scale: 1.08, zIndex: 10, duration: 0.3, ease: e }, at + 0.1)
-        tl.to(card, { scale: 1.1, duration: 0.2, ease: e }, at + 0.4) // hold opacity 1 (40–60%)
-        tl.to(card, { opacity: 0.2, scale: 0.78, zIndex: 2, duration: 0.3, ease: e }, at + 0.6)
-        tl.to(card, { opacity: 0, scale: 0.7, zIndex: 1, duration: 0.1, ease: e }, at + 0.9)
+        tl.set(card, { opacity: 0, scale: 0.66, borderRadius: 14, zIndex: 1 }, at)
+        tl.to(card, { opacity: 0.2, scale: 0.8, zIndex: 2, duration: 0.1, ease: e }, at)
+        tl.to(card, { opacity: 1, scale: 1.18, borderRadius: 44, zIndex: 10, duration: 0.3, ease: e }, at + 0.1)
+        tl.to(card, { scale: 1.24, duration: 0.2, ease: e }, at + 0.4) // hold opacity 1 (40–60%)
+        tl.to(card, { opacity: 0.2, scale: 0.8, borderRadius: 14, zIndex: 2, duration: 0.3, ease: e }, at + 0.6)
+        tl.to(card, { opacity: 0, scale: 0.66, duration: 0.1, ease: e }, at + 0.9)
       })
 
       return () => {
