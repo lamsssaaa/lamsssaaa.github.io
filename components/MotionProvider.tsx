@@ -78,8 +78,37 @@ export function MotionProvider() {
       ScrollTrigger.refresh()
     })
 
+    // Pinned horizontal "swipe": the work section pins and its panels slide
+    // sideways as you scroll. Desktop only; mobile keeps the vertical stack.
+    const mm = gsap.matchMedia()
+    mm.add('(min-width: 760px)', () => {
+      const section = document.querySelector<HTMLElement>('[data-hsection]')
+      const track = document.querySelector<HTMLElement>('[data-hscroll]')
+      if (!section || !track) return
+      section.setAttribute('data-h', 'on')
+      const amount = () => track.scrollWidth - window.innerWidth
+      const tween = gsap.to(track, {
+        x: () => -amount(),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          pin: true,
+          scrub: 1,
+          start: 'top top',
+          end: () => '+=' + amount(),
+          invalidateOnRefresh: true,
+        },
+      })
+      return () => {
+        section.removeAttribute('data-h')
+        tween.scrollTrigger?.kill()
+        tween.kill()
+      }
+    })
+
     return () => {
       ctx.revert()
+      mm.revert()
       gsap.ticker.remove(tick)
       lenis.destroy()
     }
