@@ -141,12 +141,12 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(36vw, 460px);
-  height: min(58svh, 520px);
+  width: min(82vw, 1240px);
+  height: min(60svh, 620px);
   min-height: 0;
   border: 1px solid var(--line);
-  border-radius: 18px;
-  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 50px 130px rgba(0, 0, 0, 0.6);
   opacity: 0;
   will-change: transform, opacity;
 }

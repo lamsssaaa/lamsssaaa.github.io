@@ -99,7 +99,7 @@ export function MotionProvider() {
       section.setAttribute('data-on', '')
       const STEP = 0.4
       const total = (cards.length - 1) * STEP + 1
-      const ax = () => window.innerWidth * 0.36
+      const ax = () => window.innerWidth * 0.52
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -114,9 +114,8 @@ export function MotionProvider() {
 
       cards.forEach((card, i) => {
         const at = i * STEP
-        // Vertical amplitude tied to card WIDTH: neighbours (0.4 apart) sit
-        // ~25% of a card width apart vertically (staircase offset).
-        const ay = () => (card.offsetWidth || 600) * 0.3125
+        // Vertical arc amplitude (about a third of the viewport).
+        const ay = () => window.innerHeight * 0.34
         // Diagonal position + 3D flip. Linear rotateY ramp that reads as 65° at
         // -10%, 0° at 50%, -65° at 110% → ~±54° at the visible edges.
         tl.fromTo(
@@ -127,12 +126,12 @@ export function MotionProvider() {
         )
         // Opacity curve + fisheye bulge (taller than wide → bigger top/bottom).
         const e = 'none'
-        tl.set(card, { opacity: 0, scaleX: 0.66, scaleY: 0.66, borderRadius: 16, zIndex: 1 }, at)
-        tl.to(card, { opacity: 0.2, scaleX: 0.8, scaleY: 0.85, zIndex: 2, duration: 0.1, ease: e }, at)
-        tl.to(card, { opacity: 1, scaleX: 1.12, scaleY: 1.32, borderRadius: 48, zIndex: 10, duration: 0.3, ease: e }, at + 0.1)
-        tl.to(card, { scaleX: 1.15, scaleY: 1.38, duration: 0.2, ease: e }, at + 0.4) // hold opacity 1 (40–60%)
-        tl.to(card, { opacity: 0.2, scaleX: 0.8, scaleY: 0.85, borderRadius: 16, zIndex: 2, duration: 0.3, ease: e }, at + 0.6)
-        tl.to(card, { opacity: 0, scaleX: 0.66, scaleY: 0.66, duration: 0.1, ease: e }, at + 0.9)
+        tl.set(card, { opacity: 0, scaleX: 0.82, scaleY: 0.82, borderRadius: 12, zIndex: 1 }, at)
+        tl.to(card, { opacity: 0.2, scaleX: 0.88, scaleY: 0.9, zIndex: 2, duration: 0.1, ease: e }, at)
+        tl.to(card, { opacity: 1, scaleX: 1, scaleY: 1.05, borderRadius: 20, zIndex: 10, duration: 0.3, ease: e }, at + 0.1)
+        tl.to(card, { scaleX: 1.02, scaleY: 1.07, duration: 0.2, ease: e }, at + 0.4) // hold opacity 1 (40–60%)
+        tl.to(card, { opacity: 0.2, scaleX: 0.88, scaleY: 0.9, borderRadius: 12, zIndex: 2, duration: 0.3, ease: e }, at + 0.6)
+        tl.to(card, { opacity: 0, scaleX: 0.82, scaleY: 0.82, duration: 0.1, ease: e }, at + 0.9)
 
         // Full-bleed background of the active project (crossfade, peak at center).
         const bg = bgs[i]
