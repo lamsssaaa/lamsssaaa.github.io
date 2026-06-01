@@ -1,19 +1,21 @@
+import type { CSSProperties } from 'react'
 import { type Lang } from '../../lib/i18n'
 import { projectsHeading, projects } from '../../data/content'
 import { AdaptiveVideo } from '../AdaptiveVideo'
 import styles from './Projects.module.css'
 
 /**
- * "Travaux récents" — desktop: the section pins and project cards ride a shared
- * diagonal timeline. Cards overlap (consecutive cards are 40% apart in their
- * local progress), so you see the previous (fading out top-left), the current
- * (centered, bright, bulged) and the next (fading in bottom-right) at once.
- * Opacity 0 → .2 → 1 → .2 → 0 and a fisheye-like scale bulge at center.
- * Driven in MotionProvider. Mobile / reduced-motion = vertical stack.
+ * "Travaux récents" — desktop "vortex": three layers driven by MotionProvider.
+ *  1. full-bleed background of the active project (crossfades on scroll)
+ *  2. a big bottom-left title for the active project
+ *  3. floating project cards that arc through (diagonal + 3D rotateY + bulge)
+ * Mobile / reduced-motion fall back to a clean vertical stack (cards only).
  */
 const VIEW = { fr: 'Voir le projet', en: 'View project' } as const
+const SCROLL = { fr: 'Faites défiler', en: 'Scroll' } as const
 
 export function Projects({ lang }: { lang: Lang }) {
+  const v = (i: number) => ({ ['--i' as string]: i }) as CSSProperties
   return (
     <section id="work" className="section" data-diag-section>
       <div className="container">
@@ -22,20 +24,33 @@ export function Projects({ lang }: { lang: Lang }) {
       </div>
 
       <div className={styles.stage} data-stage>
+        {/* 1. Full-bleed backgrounds (one per project, crossfading). */}
         {projects.map((p, i) => (
-          <article key={p.name} className={styles.card} data-diag>
+          <div key={`bg-${i}`} className={styles.bg} data-bg style={v(i)}>
+            <AdaptiveVideo high={p.videoHigh ?? '/video/hero-high.mp4'} low={p.videoLow ?? '/video/hero-low.mp4'} poster={p.poster ?? '/video/hero-poster.svg'} />
+            <div className={styles.bgShade} />
+          </div>
+        ))}
+
+        {/* 2. Big bottom-left title for the active project. */}
+        {projects.map((p, i) => (
+          <div key={`t-${i}`} className={styles.bigTitle} data-bigtitle style={v(i)}>
+            <h3 className={styles.bigName}>{p.name}</h3>
+            <p className={styles.bigLine}>{p.line[lang]}</p>
+          </div>
+        ))}
+        <span className={styles.scrollHint}>{SCROLL[lang]} — {VIEW[lang]}</span>
+
+        {/* 3. Floating "vortex" cards. */}
+        {projects.map((p, i) => (
+          <article key={p.name} className={styles.card} data-diag style={v(i)}>
             <div className={styles.media}>
-              <AdaptiveVideo
-                high={p.videoHigh ?? '/video/hero-high.mp4'}
-                low={p.videoLow ?? '/video/hero-low.mp4'}
-                poster={p.poster ?? '/video/hero-poster.svg'}
-              />
+              <AdaptiveVideo high={p.videoHigh ?? '/video/hero-high.mp4'} low={p.videoLow ?? '/video/hero-low.mp4'} poster={p.poster ?? '/video/hero-poster.svg'} />
               <div className={styles.shade} />
             </div>
             <div className={styles.overlay}>
               <span className={styles.idx}>{String(i + 1).padStart(2, '0')}</span>
               <h3 className={styles.name}>{p.name}</h3>
-              <p className={styles.line}>{p.line[lang]}</p>
               <div className={styles.meta}>
                 <span className={styles.client}>{p.client[lang]}</span>
                 <span className={styles.tag}>{p.tag[lang]}</span>

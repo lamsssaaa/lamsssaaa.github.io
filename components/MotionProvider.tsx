@@ -93,6 +93,8 @@ export function MotionProvider() {
     mm.add('(min-width: 760px)', () => {
       const section = document.querySelector<HTMLElement>('[data-diag-section]')
       const cards = gsap.utils.toArray<HTMLElement>('[data-diag]')
+      const bgs = gsap.utils.toArray<HTMLElement>('[data-bg]')
+      const titles = gsap.utils.toArray<HTMLElement>('[data-bigtitle]')
       if (!section || !cards.length) return
       section.setAttribute('data-on', '')
       const STEP = 0.4
@@ -131,6 +133,21 @@ export function MotionProvider() {
         tl.to(card, { scaleX: 1.15, scaleY: 1.38, duration: 0.2, ease: e }, at + 0.4) // hold opacity 1 (40–60%)
         tl.to(card, { opacity: 0.2, scaleX: 0.8, scaleY: 0.85, borderRadius: 16, zIndex: 2, duration: 0.3, ease: e }, at + 0.6)
         tl.to(card, { opacity: 0, scaleX: 0.66, scaleY: 0.66, duration: 0.1, ease: e }, at + 0.9)
+
+        // Full-bleed background of the active project (crossfade, peak at center).
+        const bg = bgs[i]
+        if (bg) {
+          tl.set(bg, { opacity: 0, zIndex: 0 }, at)
+          tl.to(bg, { opacity: 1, zIndex: 1, duration: 0.5, ease: 'power1.inOut' }, at)
+          tl.to(bg, { opacity: 0, zIndex: 0, duration: 0.5, ease: 'power1.inOut' }, at + 0.5)
+        }
+        // Big bottom-left title for the active project.
+        const title = titles[i]
+        if (title) {
+          tl.set(title, { opacity: 0, y: 50 }, at)
+          tl.to(title, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, at + 0.1)
+          tl.to(title, { opacity: 0, y: -40, duration: 0.3, ease: 'power2.in' }, at + 0.6)
+        }
       })
 
       return () => {

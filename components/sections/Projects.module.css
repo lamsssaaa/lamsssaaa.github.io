@@ -4,7 +4,14 @@
   flex-direction: column;
 }
 
-/* Default / fallback (mobile, reduced-motion, no-JS): clean vertical stack. */
+/* Layers that only exist in the desktop vortex are hidden in the fallback. */
+.bg,
+.bigTitle,
+.scrollHint {
+  display: none;
+}
+
+/* Default / fallback (mobile, reduced-motion, no-JS): clean vertical card stack. */
 .card {
   position: relative;
   min-height: 78svh;
@@ -48,12 +55,6 @@
   line-height: 0.98;
   letter-spacing: -0.02em;
 }
-.line {
-  margin: var(--s2) 0 0;
-  color: var(--muted);
-  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
-  max-width: 32ch;
-}
 .meta {
   margin-top: var(--s3);
   display: flex;
@@ -74,24 +75,78 @@
   white-space: nowrap;
 }
 
-/* ── Desktop: pinned, overlapping cards on a shared diagonal timeline ── */
+/* ── Desktop vortex (enabled by MotionProvider via [data-on]) ── */
 [data-diag-section][data-on] .stage {
   margin-top: 0;
   position: relative;
   height: 100svh;
   overflow: hidden;
-  perspective: 1400px;
+  perspective: 1500px;
 }
+
+/* 1. Full-bleed background */
+[data-diag-section][data-on] .bg {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  will-change: opacity;
+}
+[data-diag-section][data-on] .bgShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* 2. Big bottom-left title */
+[data-diag-section][data-on] .bigTitle {
+  display: block;
+  position: absolute;
+  left: var(--gutter);
+  bottom: 12%;
+  z-index: 1;
+  max-width: 42vw;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.bigName {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.bigLine {
+  margin: var(--s2) 0 0;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--fg);
+  opacity: 0.85;
+}
+[data-diag-section][data-on] .scrollHint {
+  display: block;
+  position: absolute;
+  bottom: var(--s3);
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 3;
+  font-size: 0.66rem;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* 3. Floating vortex cards */
 [data-diag-section][data-on] .card {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(60vw, 600px);
-  height: min(60svh, 440px);
+  width: min(36vw, 460px);
+  height: min(58svh, 520px);
   min-height: 0;
   border: 1px solid var(--line);
-  border-radius: 12px;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+  border-radius: 18px;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
   opacity: 0;
   will-change: transform, opacity;
 }
@@ -102,5 +157,5 @@
   padding: var(--s3);
 }
 [data-diag-section][data-on] .name {
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
 }
